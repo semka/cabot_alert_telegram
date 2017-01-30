@@ -8,7 +8,7 @@ from os import environ as env
 
 import telebot
 
-telegram_template = """{% if service.overall_status == service.PASSING_STATUS %}✅ {{ service.name }} is OK now{% else %}🚫 {{ service.name }}: {{ service.overall_status }}{% endif %}.\n {% if service.overall_status != service.PASSING_STATUS %}{% for check in service.all_failing_checks %}\n- {{ check.name }}{% if check.last_result.error %}{{ check.last_result.error|safe }} {% endif %}{% endfor %}{% endif %}"""
+telegram_template = """{% if service.overall_status == service.PASSING_STATUS %}✅ {{ service.name }} is OK now{% else %}🚫 {{ service.name }}: {{ service.overall_status }}{% endif %}.\n {% if service.overall_status != service.PASSING_STATUS %}{% for check in service.all_failing_checks %}\n{{ check.name }}: {% if check.last_result.error %}{{ check.last_result.error|safe }} {% endif %}{% endfor %}{% endif %}"""
 
 # This provides the telegram alias for each user.
 # Each object corresponds to a User
